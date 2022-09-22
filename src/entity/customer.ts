@@ -9,7 +9,12 @@ export default class Customer {
 
     constructor(id: string, name: string) {
         this._id = id;
+        this._name = name;
         this.validate();
+    }
+
+    get name(): string { 
+        return this._name;
     }
 
     validate(): void {
@@ -26,12 +31,23 @@ export default class Customer {
         this.validate();
     }
     
+    isActive(): boolean {
+        return this._active;
+    }
+
     activate() {
+        if (this._address === undefined) {
+            throw new Error("Address is mandatory to activate a customer");
+        }
         this._active = true;
     }
 
     deactivate() {
         this._active = false;
+    }
+
+    set Address(address: Address) {
+        this._address = address;
     }
     
 }
