@@ -10,7 +10,7 @@ describe("Product repository test", () => {
     beforeEach(async () => {
         sequelize = new Sequelize({
             dialect: 'sqlite',
-            storage: ':memory',
+            storage: ':memory:',
             logging: false,
             sync: { force: true },
         });
@@ -20,9 +20,9 @@ describe("Product repository test", () => {
 
     })
     
-    // afterEach(async () => {
-    //     await sequelize.close();
-    // });
+    afterEach(async () => {
+        await sequelize.close();
+    });
 
     it("should create a product", async () => {
         const productRepository = new ProductRepository();
